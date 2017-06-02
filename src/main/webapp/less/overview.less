@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html,
+body {
+    color: #fff;
+    height: 100%;
+    background-color: #fbbc05;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.my-header {
+    width: 100%;
+    height: 38.2%;
+    background-image: url(//storage.goldskyer.com/gmxx/images/overview02.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.my-menu {
+    height: 61.8%;
+    padding: 0 10px;
+    .space {
+        height: 10px;
+    }
+    .my-item {
+        width: 100%;
+        .my-item-img {
+            width: 75%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .my-item-title {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            width: 150px;
+            height: 100%;
+            position: relative;
+            left: -10px;
+            z-index: 10;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+            font-size: 20px;
+            opacity: 0;
+        }
+    }
+    .my-item-1 {
+        .my-item-title {
+            background-color: rgb(234, 67, 53);
+        }
+    }
+    .my-item-2 {
+        .my-item-title {
+            background-color: #FF4DA9;
+        }
+    }
+    .my-item-3 {
+        .my-item-title {
+            background-color: rgb(52, 168, 83);
+        }
+    }
+    .my-item-4 {
+        .my-item-title {
+            background-color: #3ABCFF;
+        }
+    }
+}
+
+.module-tap-active {
+    -webkit-animation: scaleout 1.5s infinite ease-in-out;
+    animation: scaleout 1.5s infinite ease-in-out;
+}
+
+@-webkit-keyframes scaleout {
+    0% {
+        -webkit-transform: scale(0.5)
+    }
+    100% {
+        -webkit-transform: scale(2.0);
+        opacity: 0;
+    }
+}
+
+@keyframes scaleout {
+    0% {
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+    100% {
+        transform: scale(2.0);
+        -webkit-transform: scale(2.0);
+        opacity: 0;
+    }
+}

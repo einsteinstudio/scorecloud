@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/awardRotate.js"></script>
+        <script type="text/javascript" src="js/fingerprint.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+    <script type="text/javascript" src="js/common.js"></script>
+    
+    
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+    	.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+.alert {
+    padding: 5px 0px 0px 0px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.row {
+  padding-bottom: 10vw;
+}
+.row input{
+  float:left;
+  width:70%;
+}
+
+.row span
+{
+  margin-top:2vw;
+  float:left;
+  width:15%;
+}
+    </style>
+
+        <script>
+        $(function (){
+            var bRotate = false;
+
+            //a
+                  var fp = new Fingerprint({screen_resolution: true,canvas: true,ie_activex: true});
+
+            $('#submit').bind('click',function(){
+                 if($('input[name="department"]').val()=='')
+                {
+                  showErr('请填写部门');
+                  return;
+                } 
+                if($('input[name="name"]').val()=='')
+                {
+                  showErr('请输入姓名');
+                  return;
+                }
+                if(!checkMobile($("input[name='mobile']").val()))
+                {
+                  showErr('请输入正确的手机号');
+                  return;
+                }
+                $.ajax({
+                      url:'/award/completeInfo.json',
+                      data:{
+                        accountId:$('input[name="mobile"]').val(),
+                        fp:fp.get(),
+                        name:$('input[name="name"]').val(),
+                        department:$('input[name="department"]').val(),
+                        cardNo:$('input[name="cardNo"]').val(),
+                        random:$.cookie('random')
+                      },
+                      success:function(data){
+                          if(data.result!='success')
+                          {
+                            showErr(data.msg);
+                          }
+                          else
+                          {
+                            window.location.href="test_main_option.html";
+                          }
+                      }
+                    });
+            });
+
+                _DATA={};
+
+                var sendAward=function(){
+                  $.ajax({
+                      url:'/award/doAward.json',
+                      async:false,
+                      data:{
+                        accountId:'',
+                        fp:fp.get(),
+                        activityId:'001',
+                        random:$.cookie('random')
+                      },
+                      success:function(data){
+                        _DATA=data;
+                        if(_DATA.result!='success')
+                        {
+                          award=9;
+                        }
+                        else
+                        {
+                          var aId=data.data.awardRecord.awardId;
+                          if(aId=='001_01')
+                          {
+                            award=1;
+                          }else if(aId=='001_02')
+                          {
+                            award=2;
+                          }else if(aId=='001_03')
+                          {
+                            award=3;
+                          }else if(aId=='001_04')
+                          {
+                            award=4;
+                          }else if(aId=='001_05')
+                          {
+                            award=5;
+                          }
+                          else
+                          {
+                            award=6+Math.floor(Math.random()*5);
+                          }
+                        }
+                          
+                      }
+                  });
+            };
+
+
+            var rotateTimeOut = function (){
+                $('#rotate').rotate({
+                    angle:0,
+                    animateTo:2160,
+                    duration:8000,
+                    callback:function (){
+
+                        alert('网络超时，请检查您的网络设置！');
+                    }
+                });
+            };
+
+            var rotateFn = function (awards, angles, txt){
+                $('#rotate').stopRotate();
+                $('#rotate').rotate({
+                    angle:0,
+                    animateTo:angles+1800,
+                    duration:2000,
+                    callback:function (){
+                        //alert(txt);
+
+
+                        $(".init-info").hide();
+                        if(awards>0 && awards<=5)
+                        {
+                          $(".happy").show();
+                          $("#award-text").html(txt);
+                        }
+                        else
+                        {
+                          $(".sorry").show();
+                        }
+                    }
+                })
+            };
+            award=9;
+            $('.pointer').click(function (){
+
+                if(bRotate)
+                {
+                  showErr("你只能抽一次哦");
+                  return;
+                }
+                bRotate=true;
+                sendAward();
+                if(typeof(_DATA.result)=="undefined")
+                {
+                  return;
+                }
+                if(_DATA.result!='success' &&  typeof(_DATA.msg)!="undefined")
+                {
+                  showErr(_DATA.msg);
+                  return;
+                }
+
+
+                //
+                console.log(award);
+                switch (award) {
+                    case 1:
+                        //var angle = [26, 88, 137, 185, 235, 287, 337];
+                        rotateFn(1, 0, '恭喜你获得一等奖：小米盒子');
+                        break;
+                    case 2:
+                        //var angle = [88, 137, 185, 235, 287];
+                        rotateFn(2, 60, '恭喜你获得二等奖：卡通台灯');
+                        break;
+                    case 3:
+                        //var angle = [137, 185, 235, 287];
+                        rotateFn(3, 300, '恭喜你获得三等奖：干发帽');
+                        break;
+                    case 4:
+                        //var angle = [137, 185, 235, 287];
+                        rotateFn(4, 120, '恭喜你获得四等奖：杯子');
+                        break;
+                    case 5:
+                        //var angle = [185, 235, 287];
+                        rotateFn(5, 180, '恭喜你获得五等奖：指甲剪');
+                        break;
+    
+                    case 6:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 30, '');
+                    case 7:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 90, '');
+                    case 8:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 150, '');
+                    case 9:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 210, '');
+                    case 10:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 270, '');
+                    case 11:
+                        //var angle = [185, 235, 287];
+                        rotateFn(100, 330, '');
+                        break;
+                    default :
+                        //var angle = [287];
+                        rotateFn(100, 287, '');
+                        break;
+                }
+
+            });
+        });
+        function rnd(n, m){
+            return Math.floor(Math.random()*(m-n+1)+n)
+        }
+    </script>
+</head>
+<body class="chou" style="overflow-x:hidden;overflow-y:hidden;">
+<div class="" style="padding-top:2vw">
+
+
+<div class="main">
+  <div id="outercont">
+      <div id="outer-cont">
+        <div id="outer" class="rotate">
+          <img src="images/wheel.png" id="rotate" width="310px"/>
+        </div>
+      </div>
+       <div id="inner-cont">
+          <div id="inner" class="pointer">
+            <img src="images/activity-lottery-2.png" id="pointer"/>
+          </div>
+      </div> 
+  </div>
+</div>
+
+
+  <!--抽奖初始页面-->
+  <div class="init-info content">
+    <div>点击圆盘中间“<span style="color:orange">开始抽奖</span>”,开启您的幸运之旅</div>
+
+    <div class="text-big aligncenter" style="text-align:center">奖项设置</div>
+    <div style="padding:4vw 10vw ">
+      <div>一等奖：小米盒子迷你版</div>
+      <div>二等奖：卡通台灯</div>
+      <div>三等奖：干发帽</div>
+      <div>四等奖：杯子</div>
+      <div>五等奖：指甲剪</div>
+
+    </div>
+  </div>
+
+  <!--抽奖未中奖页面-->
+  <div class="sorry content" style="display:none">
+    <div style="text-align:center;color:orange">很遗憾，你没有获得奖品哦</div>
+
+    <div class="height:20vw"></div>
+    <button class="a-btn aligncenter" type="button"  onclick="javascript:window.location.href='test_main_option.html'">返回首页</button>
+  </div>
+
+
+    
+
+
+    
+  <div class="container happy content" style="display:none">
+    <div id="award-text" style="text-align:center;color:orange"></div>
+    <div>请务必注明清楚部门及姓名，工会将通知统一发奖</div>
+    <div class="row">
+      <span>部门*</span>
+      <input type="text" name="department" />
+    </div>
+    <div class="row">
+      <span>姓名*</span>
+      <input type="text" name="name" />
+    </div>
+    <div class="row">
+      <span>电话*</span>
+      <input   type="text" name="mobile" />
+    </div>
+    <div class="row">
+      <span>卡号</span>
+      <input   type="text" name="cardNo" />
+    </div>
+
+    <div class="row" >
+      <div style="height:4vw"></div>
+      <button id="submit" class="a-btn aligncenter" type="button" >提交</button>
+    </div>
+
+  </div>
+
+
+
+</div>
+</body>
+</html>

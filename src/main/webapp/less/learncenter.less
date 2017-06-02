@@ -1,0 +1,194 @@
+@import './reset';
+@import './widget/news/pullToRefresh';
+@import './widget/navigator/navigator';
+@import './widget/navigator/navigator.iscroll';
+@import './widget/navigator/navigator.default';
+@import './widget/navigator/navigator.iscroll.default';
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  background: #f3f3f3;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+div.rich_media_area {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  padding-bottom: 15px;
+}
+
+div.rich_media_list {
+  display: inline-block;
+  background-color: #FFF;
+  margin: 10px 15px 0 15px;
+  border-radius: 5px;  
+}
+
+div.media_content {
+  padding: 5px 15px;
+}
+
+.media_title {
+  padding: 10px 0px 5px 0px;
+  font-weight: bold;
+}
+
+.media_date {
+  color: #8c8c8c;
+  font-size: 14px;
+  padding-bottom: 4px;
+}
+
+.media_image {
+  height: 160px;
+  width: 100%;
+}
+
+.media_subject {
+  color: #8c8c8c;
+  padding: 5px 0 5px 0;
+  font-size: 15px;
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+div.tips {
+  font: 14px Arial;
+  color: #8c8c8c;
+  overflow: hidden;
+  line-height: 16px;
+  padding: 10px 0px 10px 0px;
+  border: 1px solid #e0e0e0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+div.tips_pl {
+  float: left;
+  width: 33%;
+  line-height: 16px;
+
+}
+
+div.tips_like {
+  float: right;
+  width: 33%;
+  line-height: 16px;
+  border-left: solid 1px #e0e0e0;
+}
+
+div.tips_zf {
+  float: right;
+  width: 33%;
+  line-height: 16px;
+  border-left: solid 1px #e0e0e0;
+}
+
+.icon_pl_gray {
+  background: transparent url(../images/pinglunshu.png) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+
+.icon_pl_red {
+  background: transparent url(../images/pinglunshu-red.png) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+
+.icon_praise_gray {
+  background: transparent url(//storage.goldskyer.com/gmxx/images/dianzan.png) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  padding-bottom: 2px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+
+.icon_praise_red {
+  background: transparent url(//storage.goldskyer.com/gmxx/images/dianzan-red.png) no-repeat 0 0;
+  width: 20px;
+  height: 20px;
+  padding-bottom: 2px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+
+.icon_zf_gray {
+  background: transparent url(../images/zhuanfa.png) no-repeat 0 0;
+  width: 22px;
+  height: 22px;
+  margin-left: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  -webkit-background-size: 100% auto;
+  background-size: 100% auto;
+}
+
+.loadmore-div {
+    height:40px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.loadmore-p {
+    text-align: center;
+    display:block;
+    color: #8c8c8c;
+    font-size: 14px;
+}
+
+.loadmore-img {
+    display:none;
+    height:20px;
+    margin:0 auto;
+}
+
+.noResult {
+    text-align: center;
+    margin-top: 100px;
+    display:none;
+    color: #8c8c8c;
+    font-size: 14px;
+}  
+
+.pageNo {
+    display:none;
+}
+
+.currentshowlicount {
+    display:none;
+}
+
+.blogType {
+    display:none;
+}

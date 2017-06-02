@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function (){
+        	$('#type').html(getQueryString("type"));
+        	$('#result').html(getQueryString("result"));
+        });
+    </script>
+</head>
+<body>
+<div class="content" style="text-align:center;padding-top:5vw">
+	<image src="images/report.png" style="margin-bottom:-8vw" height="60vw"></image>
+	<div class="big-dialog">
+		<div id="type" style="text-align:center" class="text-big">压力测试结果</div>
+		<div style="text-align:center" class="result" id="result">您的压力过大去，要注意调节哦</div>
+	</div>
+    <div style="text-align:center;padding:2vw" class="result-info press">
+
+        <div class="text-big" >焦虑类型</div>
+            <p>1、没有焦虑</p>
+            <p>2、轻度焦虑</p>
+            <p>3、中度焦虑</p>
+            <p>4、重度焦虑</p>
+        </div>
+       
+    </div>
+	<button class="a-btn aligncenter" type="button"  onclick="javascript:window.location.href='test_main_option.html'">返回首页</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>压力测试</title>
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function (){
+        	$('#paper1').html(getQueryString("paper1"));
+        	$('#result').html(getQueryString("result"));
+        });
+    </script>
+</head>
+<body>
+<div class="content" style="padding-top:2vw">
+	<image src="images/report.png" style="margin-bottom:-8vw"  height="60vw"></image>
+	<div class="big-dialog">
+		<div style="text-align:center" class="text-big">抑郁测试结果</div>
+		<div style="text-align:center" class="result" id="result">您的压力过大去，要注意调节哦</div>
+	</div>
+
+    <div style="text-align:center;padding:2vw" class="result-info glommy" >
+        <div class="text-big" >抑郁类型</div>
+        <p>1、没有抑郁</p>
+        <p>2、轻度抑郁</p>
+        <p>3、中度抑郁</p>
+        <p>4、严重抑郁</p>
+    </div>
+
+<button class="a-btn aligncenter" type="button" onclick="javascript:window.location.href='test_main_v2.html'">返回主页</button>
+</div>
+</body>
+</html>

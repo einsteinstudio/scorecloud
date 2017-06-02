@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="supportedMediaTypes">    
+                    <list>                          
+                        <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->    
+                        <value>application/json;charset=UTF-8</value>
+                    </list>    
+                </property>
+				<property name="objectMapper" ref="customObjectMapper"></property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<mvc:interceptors>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*.htm" />
+			<mvc:mapping path="/**/*.json" />
+			<bean class="com.goldskyer.gmxx.common.interceptors.GmxxInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/manager/**/*.htm" />
+			<mvc:mapping path="/manager/**/*.json" />
+			<bean class="com.goldskyer.gmxx.manager.interceptors.AuthInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*.htm" />
+			<mvc:mapping path="/**/*.json" />
+			<bean class="com.goldskyer.gmxx.common.interceptors.AvoidDuplicateSubmissionInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/scorecloud/**/*.htm" />
+			<mvc:mapping path="/scorecloud/**/*.json" />
+			<bean class="com.goldskyer.scorecloud.listener.ScoreCloudHandler"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 激活@Controller模式 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<!-- <property name="interceptors"> <list> <bean class="com.goldskyer.gmxx.common.interceptors.GmxxInterceptor"></bean> 
+			</list> </property> -->
+	</bean>
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
+		<property name="messageConverters"> <list> <ref bean="byteArray_hmc" /> <ref 
+		bean="string_hmc" /> <ref bean="resource_hmc" /> <ref bean="source_hmc" /> 
+		<ref bean="xmlAwareForm_hmc" /> <ref bean="jaxb2RootElement_hmc" /> <ref 
+		bean="jackson_hmc" /> </list> </property> </bean> <bean id="byteArray_hmc" 
+		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" 
+		/> 处理.. <bean id="string_hmc" class="org.springframework.http.converter.StringHttpMessageConverter" 
+		/> 处理.. <bean id="resource_hmc" class="org.springframework.http.converter.ResourceHttpMessageConverter" 
+		/> 处理.. <bean id="source_hmc" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" 
+		/> 处理.. <bean id="xmlAwareForm_hmc" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" 
+		/> 处理.. <bean id="jaxb2RootElement_hmc" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" 
+		/> 处理.. <bean id="jackson_hmc" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
+		<property name="supportedMediaTypes"> <list> <value>application/json;charset=UTF-8</value> 
+		<value>text/json;charset=UTF-8</value> <value>text/plain;charset=UTF-8</value> 
+		<value>text/html;charset=UTF-8</value> <value>text/css;charset=UTF-8</value> 
+		</list> </property> </bean> -->
+
+	<bean id="customObjectMapper" class="com.goldskyer.core.supports.CustomObjectMapper"></bean>
+
+	<!-- 对静态资源文件的访问 -->
+	<mvc:resources mapping="/myapp/**" location="/myapp/" />
+	<mvc:resources mapping="/*.html" location="/" />
+	<mvc:resources mapping="/h5/**" location="/h5/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/javascript/**" location="/javascript/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/tool/**" location="/tool/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/photos/**" location="/photos/" />
+	<mvc:resources mapping="/storage/**" location="/storage/" />
+	<mvc:resources mapping="/plugins/**" location="/plugins/" />
+	<mvc:resources mapping="/temp/**" location="/temp/" />
+	<mvc:resources mapping="/store/**" location="/store/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
+	<mvc:resources mapping="/survey/**" location="/survey/" />
+	<mvc:resources mapping="/dist/**" location="/dist/" />
+	<mvc:resources mapping="/html/**" location="/html/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
+	<mvc:resources mapping="/less/**" location="/less/" />
+	<mvc:resources mapping="/video/**" location="/video/" />
+	<mvc:resources mapping="/manager/**" location="/manager/" />
+
+	<!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 需要更改 -->
+
+	<!-- 注解模式 -->
+	<context:component-scan base-package="com"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+		<mvc:resources location="/ftl" mapping="/static/**" /><!-- 禁止直接访问ftl -->
+	
+<!-- 设置freeMarker配置 -->
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/ftl" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="defaultEncoding">UTF-8</prop>
+				<prop key="datetime_format">yyyy-MM-dd HH:mm</prop>
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<prop key="time_format">HH:mm</prop>
+				<prop key="number_format">###0.###</prop>
+				<prop key="locale">no_NO</prop>
+				<prop key="time_format">HH:mm</prop>
+			</props>
+		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<!-- 此变量值为pageContext.request, 页面使用方法：req.contextPath -->
+		<property name="requestContextAttribute" value="req" />
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/jsp</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- 新增 -->
+	<!-- 上传拦截，如最大上传值及最小上传值 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000000" />
+	</bean>
+
+
+	<!--direct to jsp -->
+	<mvc:view-controller path="/index.htm" view-name="/index" />
+	<!-- <mvc:view-controller path="/web/spring/index/loginFrame.htm"
+		view-name="/web/spring/index/loginFrame" /> -->
+	<!-- <mvc:view-controller path="/web/spring/index/loginSuccess.htm"
+		view-name="/web/spring/index/loginSuccess" /> -->
+
+
+	<mvc:view-controller path="/" view-name="/index" />
+	<mvc:view-controller path="/404.htm" view-name="/404" />
+	<mvc:view-controller path="/500.htm" view-name="/500" />
+</beans>

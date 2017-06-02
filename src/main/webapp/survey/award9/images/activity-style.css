@@ -1,0 +1,52 @@
+body, div  {
+	margin: 0;
+	padding: 0;
+}
+body {
+overflow-x:hidden;
+overflow-y:hidden;
+}
+ 
+
+
+
+
+
+#outer-cont {
+	position: relative;
+	width: 100%;
+	top: 20px;
+	margin-bottom: 30px;
+}
+#inner-cont {
+	position: absolute;
+	width: 100%;
+	top: 90px;
+}
+#outer {
+	width : 310px;
+	max-width: 310px;
+	height: 310px;
+	margin: 0 auto;
+}
+#inner {
+	width : 112px;
+	max-width: 112px;
+	height: 142px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+#outer img, #inner img {
+	display: block;
+	margin: 0 auto;
+}
+
+
+.content {
+	margin:0px 0 15px 0;
+}
+
+.main img {
+	max-width: 100%;
+	border: 0 none;
+}

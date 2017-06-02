@@ -1,0 +1,47 @@
+package com.goldskyer.scorecloud.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.goldskyer.common.util.BeanUtil;
+import com.goldskyer.core.dao.BaseDao;
+import com.goldskyer.scorecloud.dto.{Grade}Dto;
+import com.goldskyer.scorecloud.entities.{Grade};
+import com.goldskyer.scorecloud.service.{Grade}Service;
+
+@Service
+public class {Grade}ServiceImpl implements {Grade}Service
+{
+	@Autowired
+	private BaseDao baseDao;
+	
+	public {Grade}Dto query{Grade}DtoById(String id)
+	{
+		{Grade}Dto {grade}Dto=new {Grade}Dto();
+		{Grade} {grade}=baseDao.query({Grade}.class,id);
+		BeanUtil.copyProperties({grade}Dto, {grade});
+		return {grade}Dto;
+	}
+	
+
+	public void add{Grade}Dto({Grade}Dto {grade}Dto)
+	{
+		{Grade} {grade} = new {Grade}();
+		BeanUtil.copyProperties({grade}, {grade}Dto);
+		baseDao.add({grade});
+	}
+
+	public void modify{Grade}Dto({Grade}Dto {grade}Dto)
+	{
+		{Grade} old{Grade} = baseDao.query({Grade}.class, {grade}Dto.getId());
+		BeanUtil.copyProperties(old{Grade}, {grade}Dto);
+		baseDao.modify(old{Grade});
+	}
+	
+
+	public void delete{Grade}DtoById(String id)
+	{
+		baseDao.delete({Grade}.class, id);
+	}
+}

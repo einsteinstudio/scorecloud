@@ -1,0 +1,10 @@
+/**
+*表单相关的CSS
+*/
+/*表单输入提示*/
+.tip-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #6789ab;
+}

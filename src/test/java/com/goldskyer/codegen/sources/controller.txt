@@ -1,0 +1,130 @@
+package com.goldskyer.scorecloud.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.goldskyer.core.dto.JsonData;
+import com.goldskyer.scorecloud.dto.{Controller}Dto;
+import com.goldskyer.scorecloud.freemarker.component.SelectComponent;
+import com.goldskyer.scorecloud.freemarker.component.vo.OperationResultVo;
+import com.goldskyer.scorecloud.service.ClassService;
+
+@Controller
+@RequestMapping("/scorecloud/{grade}")
+public class {Grade}Controller extends BaseScoreCloudController
+{
+	@Autowired
+	private {Grade}Service {grade}Service;
+	@Autowired
+	private SelectComponent selectComponent;
+	
+	@RequestMapping(value = "/toList.htm")
+	public ModelAndView toList(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/${grade}/toList");
+		return mv;
+	}
+
+	@RequestMapping(value = "/toAdd.htm")
+	public ModelAndView toAdd(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/{grade}/toAdd");
+		return mv;
+	}
+
+	@RequestMapping(value = "/add.json", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public JsonData add({Grade}Dto {grade}Dto, HttpServletRequest request, HttpServletResponse response)
+	{
+		JsonData jsonData = JsonData.success();
+		{grade}Service.add{Grade}Dto({grade}Dto);
+		return jsonData;
+	}
+
+	@RequestMapping(value = "/addSuccess.htm")
+	public ModelAndView addSuccess(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/common/operation_result");
+		OperationResultVo operationResultVo = buildOperationResult("list{Grade}", "{cnName}添加", "添加{cnName}成功", "toAdd.htm");
+		mv.addObject("result", operationResultVo);
+		return mv;
+	}
+
+	@RequestMapping(value = "/toModify.htm")
+	public ModelAndView toModify(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/{grade}/toModify");
+		{Grade}Dto {grade}Dto = {grade}Service.query{Grade}DtoById(id);
+		mv.addObject("{grade}Dto", {grade}Dto);
+		return mv;
+	}
+
+	@RequestMapping(value = "/modify.json", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public JsonData modify({Grade}Dto {grade}Dto, HttpServletRequest request, HttpServletResponse response)
+	{
+		JsonData jsonData = JsonData.success();
+		try
+		{
+			{grade}Service.modify{Grade}Dto({grade}Dto);
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			jsonData = JsonData.failure();
+		}
+		return jsonData;
+	}
+
+	@RequestMapping(value = "/modifySuccess.htm")
+	public ModelAndView modifySuccess(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/common/operation_result");
+		OperationResultVo operationResultVo = buildOperationResult("list{Grade}", "{cnName}修改", "修改{cnName}成功", "toList.htm");
+		mv.addObject("result", operationResultVo);
+		return mv;
+	}
+
+	@RequestMapping(value = "/toDelete.htm")
+	public ModelAndView toDelete(HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/{grade}/toDelete");
+		return mv;
+	}
+
+	@RequestMapping(value = "/delete.htm")
+	public ModelAndView delete(@RequestParam String id, HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("/scorecloud/common/operation_result");
+		OperationResultVo operationResultVo = buildOperationResult("list{Grade}", "{cnName}删除", "{cnName}删除成功", "toList.htm");
+		mv.addObject("result", operationResultVo);
+		try
+		{
+			String[] ids = id.split("\\|");
+			for (String i : ids)
+			{
+				if (StringUtils.isNotBlank(i))
+				{
+					{grade}Service.delete{Grade}Dto(i);
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			operationResultVo.setOperationInfo("{cnName}删除失败");
+		}
+		return mv;
+	}
+
+}

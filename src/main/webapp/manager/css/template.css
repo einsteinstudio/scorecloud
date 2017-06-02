@@ -1,0 +1,35 @@
+#alert
+{
+	z-index:10000;
+	display:block;
+	position:absolute;
+	width:600px;
+	margin-left:-8px;
+	line-height:28px;
+} 
+
+label.error 
+{
+	color:red;
+}
+
+.purchase-detail input
+{
+	margin-bottom:6px;
+}
+
+.activity .panel .panel-footer .media-object {
+    width: 30px;
+}
+
+/**
+* 列表左侧的树形菜单列表
+*/
+.dd-item {
+	cursor:pointer
+}
+
+.dd-clicked {
+    color: #20a8d8;
+    background: white;
+}

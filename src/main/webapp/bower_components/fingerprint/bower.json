@@ -1,0 +1,16 @@
+{
+  "name": "fingerprint",
+  "version": "0.5.4",
+  "main": ["fingerprint.js"],
+  "ignore": [
+    ".travis.yml",
+    ".gitignore",
+    "build",
+    "Gruntfile.js",
+    "index.html",
+    "node_modules",
+    "package.json",
+    "specs",
+    "README.md"
+  ]
+}

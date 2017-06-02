@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    Box-sizing: Border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: -webkit-linear-gradient(#3ABCFF, #fbbc05); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#3ABCFF, #fbbc05); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#3ABCFF, #fbbc05); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#3ABCFF, #fbbc05); /* 标准的语法 */
+    font-family: PingFangSC-Regular, Hiragino Sans GB, Arial, Helvetica, "宋体", sans-serif;
+    font-size: 14px;
+    color: #fff;
+}
+
+.swiper-container {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    //background-color: #fbbc05;
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        height: 300px;
+    }
+}
+
+.content {
+    //background-color: #00B83F;
+    padding: 20px;
+    .content-item {
+        display: none;
+        h1 {
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+        }
+        p {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            line-height: 24px;
+        }
+    }
+}
+
+.scroll-div {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    //background-color: #3ABCFF;
+    overflow: hidden;
+    li {
+        height: 50px;
+        padding: 0 20px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 20px;
+    }
+}

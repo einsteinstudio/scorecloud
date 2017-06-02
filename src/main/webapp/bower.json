@@ -1,0 +1,20 @@
+{
+  "name": "gmxx",
+  "version": "1.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fingerprint": "~0.5.4",
+    "font-awesome": "~4.5.0",
+    "magnific-popup": "~1.1.0",
+    "pure": "~0.6.0",
+    "Swiper": "swiper#~3.3.1",
+    "video.js": "~5.8.5"
+  }
+}

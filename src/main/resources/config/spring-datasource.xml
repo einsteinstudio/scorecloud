@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+
+	<bean id="xdcmsDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${xddb.url}" />
+		<property name="username" value="${xddb.username}" />
+		<property name="password" value="${xddb.password}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="namingStrategy">
+			<ref bean="scoreNamingStrategy" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop><!-- 新工程一定要用这个，用其他的会报错 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.goldskyer.gmxx.mock.entities</value>
+				<value>com.goldskyer.gmxx.survey.entities</value>
+				<value>com.goldskyer.gmxx.promotion.entities</value>
+				<value>com.goldskyer.core.entities</value>
+				<value>com.goldskyer.gmxx.common.entities</value>
+				<value>com.goldskyer.gmxx.acl.entities</value>
+				<value>com.goldskyer.gmxx.workflow.entities</value>
+				<value>com.goldskyer.scorecloud.entities</value>
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="xdcmsSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="xdcmsDataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop><!-- 新工程一定要用这个，用其他的会报错 -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 配置Dao -->
+	<bean id="baseDao" class="com.goldskyer.core.dao.impl.HibernateBaseDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="xdcmsbaseDao" class="com.goldskyer.core.dao.impl.HibernateBaseDao">
+		<property name="sessionFactory">
+			<ref bean="xdcmsSessionFactory" />
+		</property>
+	</bean>
+
+
+
+
+</beans>

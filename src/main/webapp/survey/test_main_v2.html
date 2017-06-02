@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/fingerprint.js"></script>
+
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+      $(function (){
+        $('.main-btn .row').bind('click',function(){
+          var paperId=$(this).attr('paperId');
+          var jump = $(this).attr('jump');
+          window.location.href=jump;        
+        });
+      });
+    </script>
+</head>
+<body>
+
+<div class="content" style="padding-top:10vw">
+
+
+<div class="container main-btn aligncenter">
+        <div class="row" paperId="paper001" jump="test_info_press.html">
+              <div class="col-xs-2"><image style="padding-left:15px;padding-top:1vw;height:20vw" width="64vw" height="16vw" src="images/main-1.png"></image></div>
+              <div class="col-xs-10">
+                <div class="line-a aligncenter">压力测试</div>
+                <div class="line-b aligncenter">了解自己面临的心理压力程度</div>
+              </div>
+        </div>
+</div>
+
+<div class="container main-btn aligncenter">
+        <div class="row" paperId="paper002" jump="test_info_yiyu.html">
+              <div class="col-xs-9">
+                <div class="line-a aligncenter">抑郁测试</div>
+                <div class="line-b aligncenter">测测你对自己的生活感不感兴趣</div>
+              </div>
+              <div class="col-xs-3"><image style="padding-top:3vw;height:20vw" width="60vw" height="20vw" src="images/main-2.png"></image></div>
+        </div>
+</div>
+
+<div class="container main-btn aligncenter">
+        <div class="row" paperId="paper003" jump="test_info_jiaolv.html">
+              <div class="col-xs-2"><image style="padding-left:15px;padding-top:5vw;height:18vw"  width="60vw" height="18vw" src="images/main-3.png"></image></div>
+              <div class="col-xs-10">
+                <div class="line-a aligncenter">焦虑测试</div>
+                <div class="line-b aligncenter">测试一下自己究竟有多紧张</div>
+              </div>
+        </div>
+</div>
+
+<div class="container main-btn aligncenter">
+        <div class="row" paperId="paper004" jump="test_info_renge.html">
+              <div class="col-xs-9">
+                <div class="line-a aligncenter">人格测试</div>
+                <div class="line-b aligncenter">用九型人格来了解真正的自我</div>
+              </div>
+              <div class="col-xs-3"><image style="padding-top:3vw;height:18vw" width="60vw" height="18vw" src="images/main-4.png"></image></div>
+        </div>
+</div>
+
+<div class="container" style="padding-top:8vw">
+        <div class="row">
+            <div class="col-xs-2"><image  width="30vw" height="36vw" src="images/ring.png"></image></div>
+              <div class="col-xs-10">
+                <div class="text-small">如需心理帮助，请拨打EAP心理咨询专线，4000809291转3，报卡号即可。</div>
+              </div>
+        </div>
+</div>
+
+
+
+</div>
+</body>
+</html>

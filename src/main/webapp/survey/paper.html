@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+            <script type="text/javascript" src="js/fingerprint.js"></script>
+
+    <script type="text/javascript" src="js/common.js"></script>
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript">
+        $(function(){
+        	var submited=false;
+        	var isV2= $.cookie('source')=='EAP';
+            document.body.addEventListener('touchstart', function () { }); 
+            var curIndex=1;
+            var paperId=getQueryString("paperId");
+             document.title = data[paperId].title; 
+            //alert(data[paperId].partPapers[0].questions[curIndex-1].questionName);
+            init(curIndex);
+            $(document).on('click','.btn-item',function(){
+                //alert(data[paperId].partPapers[0].questions.length);
+                result.data.push({"paperId":paperId,"questionId":data[paperId].partPapers[0].questions[curIndex-1].id,"answerId":$(this).find('button').attr('aId')});
+
+                if(parseInt(curIndex)>=parseInt(data[paperId].partPapers[0].questions.length))
+                {
+                    //result.selfInfo=$.cookie('self_info');
+                                var fp = new Fingerprint({screen_resolution: true,canvas: true,ie_activex: true});
+                            	if(submited) //防止重复提交
+                           		{
+                           			return;
+                           		}
+                                submited=true;
+	
+                    //不同类型的测试，跳转的目标页面是不一样的哦
+                    if(document.title=='压力测试')
+                    {
+                        result.paperId='paper001';
+                        $.ajax({
+                        	
+                            url:'/xx/survey/submit.json',
+                            type:'POST',
+                            data:{
+                                result:JSON.stringify(result),
+                                fp:fp.get(),
+                                selfInfo:$.cookie('self_info')
+                            },
+                            success:function(data){
+                            	if(isV2){
+                                    window.location.href="test_result_press.html?type=压力测试结果&result="+data.msg;
+                           		}
+                            	else{
+                                    window.location.href="test_jump.html?type=压力测试结果&result="+data.msg;
+                            	}
+                            }
+                        });
+                        //window.location.href="test_jump.html";
+                        $.cookie('finishPress','true');
+                        return;
+                    }else if(document.title=='抑郁测试')
+                    {
+                        result.paperId='paper002';
+                        $.ajax({
+                            url:'/xx/survey/submit.json',
+                            type:'POST',
+                            data:{
+                                result:JSON.stringify(result),
+                                fp:fp.get(),
+                                selfInfo:$.cookie('self_info')
+                            },
+                            success:function(data){
+                            	if(isV2){
+                                    window.location.href="test_result_yiyu.html?result="+data.msg;
+                           		}
+                            	else{
+                                    window.location.href="test_result.html?type=抑郁测试结果&result="+data.msg;
+                            	}
+                            }
+                        });
+                        return;
+                        //发送ajax提交测评结果                        return;
+                    }else if(document.title=='焦虑测试')
+                    {
+                        //发送ajax提交测评结果
+                        result.paperId='paper003';
+                        $.ajax({
+                            url:'/xx/survey/submit.json',
+                            type:'POST',
+                            data:{
+                                result:JSON.stringify(result),
+                                fp:fp.get(),
+                                selfInfo:$.cookie('self_info')
+                            },
+                            success:function(data){
+                            	if(isV2){
+                                    window.location.href="test_result_jiaolv.html?result="+data.msg;
+                           		}
+                            	else{
+                                    window.location.href="test_result_option.html?type=焦虑测试结果&result="+data.msg;
+                            	}
+                            }
+                        });
+                        return;
+                    }else if(document.title=='人格测试')
+                    {
+                        //发送ajax提交测评结果
+                        result.paperId='paper004';
+                        $.ajax({
+                            url:'/xx/survey/submit.json',
+                            type:'POST',
+                            data:{
+                                result:JSON.stringify(result),
+                                fp:fp.get(),
+                                selfInfo:$.cookie('self_info')
+                            },
+                            success:function(data){
+                            	if(isV2){
+                                    window.location.href="test_result_renge.html?result="+data.msg;
+                           		}
+                            	else{
+                                    window.location.href="test_result_option_2.html?type=人格测试结果&result="+data.msg;
+                            	}
+                            }
+                        });
+                        return;
+                    }
+                    else
+                    {
+                        showErr('网络繁忙，请稍后再试');
+                    }
+                    
+                }
+                else
+                {
+                    curIndex++;
+                    init(curIndex);
+                }
+            });
+
+            function init(curIndex)
+            {
+                $('.curIndex').html(curIndex);
+                $('.all-count').html();
+                var question=data[paperId].partPapers[0].questions[curIndex-1];
+                $('.all-count').html(data[paperId].partPapers[0].questions.length);
+                $('.dialog .question').html(question.questionName);
+                $('.group-btn').empty();
+                $.each(question.answers, function (n, answer) {  
+                    //alert(n + 'xxx' + answer.answerContent); 
+                    $('.group-btn').append('<div class="btn-item "><button type="button" aId="'+answer.id+'" class="big-btn aligncenter" >'+answer.answerContent+'</button></div>');  
+                });  
+            }
+        });
+    </script>
+</head>
+<body>
+<div ><image class="aligncenter" width="50vw" height="50vw" src="images/top-center.png"></div>
+
+<div class="content">
+<div class="dialog">
+	<div class="trans70 topic">第<span class="curIndex"></span>/<span class="all-count">0</span>题</div>
+	<div class="trans70 question"></div>
+</div>
+
+<div><image src="images/people.png" width="60vw" height="60vw" style="padding-top:-5vw"></div>
+<div class="group-btn">
+</div>
+
+</div>
+</body>
+</html>

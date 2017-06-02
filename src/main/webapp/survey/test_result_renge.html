@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function (){
+        	$('#type').html(getQueryString("type"));
+        	$('#result').html(getQueryString("result"));
+        });
+    </script>
+</head>
+<body>
+<div class="content" style="padding-top:5vw">
+	<image src="images/report.png" style="margin-bottom:-8vw" height="60vw"></image>
+	<div class="big-dialog">
+		<div id="type" style="text-align:center" class="text-big">压力测试结果</div>
+		<div style="text-align:center" class="result" id="result">您的压力过大去，要注意调节哦</div>
+	</div>
+    <div style="text-align:center;padding:2vw" class="result-info press">
+            <div class="text-big aaa" style="padding-top:2vw">人格类型</div>
+            <p class="xxx">1、躯体化症状：在身体上有较明显的不适感，并常伴有头痛、肌肉酸痛等症状。</p>
+            <p class="xxx">2、强迫症状：较明显。</p>
+            <p class="xxx">3、人际关系敏感：表明个体人际关系较为敏感，人际交往中自卑感较强，并伴有行为症状（如坐立不安，退缩等）。</p>
+            <p class="xxx">4、抑郁症状：抑郁程度较强，生活缺乏足够的兴趣，缺乏运动活力。</p>
+            <p class="xxx">5、焦虑症状：较易焦虑，易表现出烦躁、不安静和神经过敏。</p>
+            <p class="xxx">6、敌对情绪：易表现出敌对的思想、情感和行为。</p>
+           <p class="xxx"> 7、恐怖症状：较为明显，常表现出社交、广场和人群恐惧。</p>
+            <p class="xxx">8、偏执症状：偏执症状明显，较易猜疑和敌对。</p>
+            <p class="xxx">9、精神病性：表现出一定的精神病性。</p>
+        </div>
+	<div>
+       
+    </div>
+<button class="a-btn aligncenter" type="button" onclick="javascript:window.location.href='test_main_v2.html'">返回主页</button>
+</div>
+</body>
+</html>

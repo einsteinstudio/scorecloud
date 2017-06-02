@@ -1,0 +1,15 @@
+package com.goldskyer.scorecloud.service;
+import java.util.List;
+import com.goldskyer.scorecloud.dto.{Grade}Dto;
+import com.goldskyer.scorecloud.entities.{Grade};
+
+public interface {Grade}Service
+{
+	public {Grade}Dto query{Grade}DtoById(String id);
+
+	public void add{Grade}Dto({Grade}Dto {grade}Dto);
+
+	public void modify{Grade}Dto({Grade}Dto {grade}Dto);
+
+	public void delete{Grade}DtoById(String id);
+}

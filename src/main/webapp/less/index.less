@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+@charset "utf-8";
+body {
+    //background: white url(//storage.goldskyer.com/gmxx/images/2.jpg) no-repeat fixed;
+    //background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+a {
+    font-size: 14px;
+    text-decoration: none;
+    outline: 0;
+}
+
+.circle,
+.ring {
+    height: 256px;
+    position: fixed;
+    width: 256px;
+}
+
+.circle {
+    z-index: 1000;
+    top: 10%;
+    // margin: 100px 0 0 0;
+}
+
+.ring {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: scale(0.1) rotate(-270deg);
+    -moz-transform: scale(0.1) rotate(-270deg);
+    -transform: scale(0.1) rotate(-270deg);
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.open .ring {
+    opacity: 1;
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -transform: scale(1) rotate(0);
+}
+
+.center {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    bottom: 0;
+    color: white;
+    height: 80px;
+    left: 0;
+    line-height: 80px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 80px;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+}
+
+.open .center {
+    border-color: #aaaaaa;
+}
+
+.menuItem {
+    border-radius: 50%;
+    color: #eeeeee;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    position: absolute;
+    text-align: center;
+    width: 40px;
+    .menu-title {
+        font-size: 12px;
+        position: absolute;
+        line-height: 14px;
+        width: 50px;
+        left: -5px;
+        top: 40px;
+    }
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #000;
+}
+
+.logo_img {
+    position: relative;
+    width: 80%;
+    top: 8px;
+}

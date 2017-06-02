@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>中盟EAP心理测试平台</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/fingerprint.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function (){
+        //设置radio
+        if($.cookie('random') == null)
+        {
+          $.cookie('random',Math.floor(Math.random()*999),{expires:365});
+        }        
+
+         $('body').addClass('has-js');
+          $('.label_check,.label_radio').click(function(){
+              setupLabel();
+          });
+          setupLabel();
+
+        $('input[type="submit"]').bind('click',function(){
+          if($('input[name="company"]').val()=='')
+          {
+            showErr('请填写公司');
+            return;
+          }
+          if($('input[name="department"]').val()=='')
+          {
+            showErr('请填写部门');
+            return;
+          }
+          if($('input[name="age"]').val()=='')
+          {
+            showErr('请输入你的年龄');
+            return;
+          }
+          if (!document.getElementById("agree").checked) {
+            showErr('请选择同意诚实作答');
+            return;
+          }
+          var fp = new Fingerprint({screen_resolution: true,canvas: true,ie_activex: true});
+          var info='source=SUZHOU,company='+$('input[name="company"]').val()+',department='+$('input[name="department"]').val()+',age='+$('input[name="age"]').val()+',gender='+$("input[name='gender']:checked").val()+",fp="+fp.get()+",random="+$.cookie('random');
+          //alert(info);
+          $.cookie('self_info',info);
+          $.cookie('source',"SUZHOU");
+          window.location.href="test_main.html";
+
+        });
+      });
+    </script>
+</head>
+<body>
+    <div style="height:40vw;background:#48c341;padding-top:7vw;color:#ffffff">
+        <p style="text-align:center;font-size:8vw;margin:15px">中盟EAP心理测试平台</p>
+        <p style="text-align:center;font-size:5vw;margin-top:15px">职业测试</p>
+    </div>
+
+
+<div>
+<div class=" content container" style="padding:8vw">
+  <div class="row">
+    <div class="item">您所在的公司*</div>
+    <input type="text" name="company" style="width:100%"/>
+  </div>
+  <div class="row">
+    <div class="item">您所在的部门*</div>
+    <input type="text" name="department" style="width:100%"/>
+  </div>
+  <div class="row">
+    <div class="item">您的性别*</div>
+     <fieldset class="radios">
+               <label for="radio-01" class="label_radio">
+                    <input type="radio" checked="" value="1" id="radio-01" name="gender" />男
+                </label>
+
+              <label for="radio-02" class="label_radio" >
+                    <input type="radio" value="0" id="radio-02" name="gender" />女
+                </label>
+      </fieldset>
+  </div>
+  
+  <div class="row">  
+    <div class="item">您的年龄*</div>
+    <input type="number" name="age" />&nbsp;岁
+  </div>
+  <div class="row">  
+    <div class="item">本测试完全匿名，为保证结果的准确性</div>
+  </div>
+  <div class="row">  
+        <label for="agree" class="label_check">
+            <input type="checkbox"  value="1" id="agree" name="sample-checkbox-01" /> 我将诚实作答
+        </label>
+  </div>
+
+  <div>
+  
+
+
+
+  </div>
+
+
+<div><input class="a-btn aligncenter" type="submit" value="进入测试"/></div>
+</div>
+
+</body>
+</html>

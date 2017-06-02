@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function (){
+        	$('#type').html(getQueryString("type"));
+        	$('#result').html(getQueryString("result"));
+            if(getQueryString("paper1")=='压力测试结果')
+            {
+                $('.press').show();
+            }else if(getQueryString("paper1")=='抑郁测试结果')
+            {
+                $('.glommy').show();
+            }
+        });
+    </script>
+</head>
+<body>
+
+<div class="content" style="padding-top:2vw">
+
+<image src="images/report.png" class="report-icon" ></image>
+<div class="big-dialog">
+	<div id="type" style="text-align:center" class="text-big">压力测试结果</div>
+	<div id="result" class="result" id="paper1">您的压力过大去，要注意调节哦</div>
+</div>
+<div style="text-align:center;padding:2vw" class="result-info press">
+
+    <div class="text-big" >压力类型</div>
+    <p>1、适应良好型</p>
+    <p>2、轻微紧张型</p>
+    <p>3、感受压力型</p>
+    <p>4、严重压力型</p>
+</div>
+
+<div class="content" style="padding-top:0vw">
+<p>您还需完成抑郁测试，同时有机会获得小米盒子等奖品 哦~</p>
+
+</div>
+<button class="a-btn aligncenter" type="button" onclick="javascript:window.location.href='test_info_yiyu.html'">开始测试</button>
+
+</div>
+</div>
+</body>
+</html>
