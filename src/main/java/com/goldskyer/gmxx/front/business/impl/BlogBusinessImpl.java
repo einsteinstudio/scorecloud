@@ -173,7 +173,7 @@ public class BlogBusinessImpl implements BlogBusiness{
 	{
 		String roledMenuStr = EnvParameter.get().getN18().equals("cn") ? "roledMenu"
 				: "roledEnMenu";
-		MenuVo roledMenu = (MenuVo) request.getSession().getAttribute("roledMenuStr");
+		MenuVo roledMenu = (MenuVo) request.getSession().getAttribute(roledMenuStr);
 		List<SelectVo> vos = new ArrayList<SelectVo>();
 		deepSearch(vos, roledMenu, 0);
 		return vos;
