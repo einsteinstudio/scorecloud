@@ -167,16 +167,25 @@
 		</profile>
 	</profiles>
 
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<name>Internal Releases</name>
-			<url>http://nexus.goldskyer.com:8081/nexus/content/repositories/releases</url>
+	 <repositories>
+    <repository>
+        <id>YOUR-PROJECT-NAME-mvn-repo</id>
+		<url>https://raw.githubusercontent.com/GoldBoyF/mvn-repos/master/releases</url>
+    </repository>
+    <repository>
+        <id>YOUR-PROJECT-NAME-mvn-repo-s</id>
+		<url>https://raw.githubusercontent.com/GoldBoyF/mvn-repos/master/snapshots</url>
+    </repository>
+</repositories>
+
+<distributionManagement>
+	<repository>
+		<id>maven-repo-public-releasess</id>
+		<url>https://raw.githubusercontent.com/GoldBoyF/mvn-repos/master/releases</url>
 		</repository>
-		<snapshotRepository>
-			<id>Snapshots</id>
-			<name>Internal Snapshots</name>
-			<url>http://nexus.goldskyer.com:8081/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+	<snapshotRepository>
+		<id>maven-repo-public-snapshots2</id>
+		<url>https://raw.githubusercontent.com/GoldBoyF/mvn-repos/master/snapshots</url>
+	</snapshotRepository>
+</distributionManagement>
 </project>
