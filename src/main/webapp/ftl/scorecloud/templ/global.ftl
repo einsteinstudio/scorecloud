@@ -1,4 +1,4 @@
-<#assign metronicPath="http://http://xcxx.szgm.edu.cn/metronic/theme">
+<#assign metronicPath="http://xcxx.szgm.edu.cn/metronic/theme">
 <#if title??> 
 <#else>
 	<#assign title="下村小学成绩系统">
