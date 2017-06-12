@@ -18,6 +18,7 @@ import com.goldskyer.core.dto.BlogQuery;
 import com.goldskyer.core.dto.EnvParameter;
 import com.goldskyer.core.entities.Blog;
 import com.goldskyer.core.entities.Menu;
+import com.goldskyer.core.enums.MenuModule;
 import com.goldskyer.core.service.BlogService;
 import com.goldskyer.core.service.CachedMenuService;
 import com.goldskyer.core.vo.MenuVo;
@@ -170,7 +171,9 @@ public class BlogBusinessImpl implements BlogBusiness{
 	 */
 	public List<SelectVo> queryMenuSelectVos(HttpServletRequest request)
 	{
-		MenuVo roledMenu = (MenuVo) request.getSession().getAttribute("roledMenu");
+		String roledMenuStr = EnvParameter.get().getN18().equals("cn") ? "roledMenu"
+				: "roledEnMenu";
+		MenuVo roledMenu = (MenuVo) request.getSession().getAttribute("roledMenuStr");
 		List<SelectVo> vos = new ArrayList<SelectVo>();
 		deepSearch(vos, roledMenu, 0);
 		return vos;

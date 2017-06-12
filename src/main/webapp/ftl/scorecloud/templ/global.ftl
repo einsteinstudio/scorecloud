@@ -1,6 +1,4 @@
-<#assign metronicPath="http://localhost:8080/app">
-<#--<#assign metronicPath="/app">-->
-<#assign metronicPath="http://tool.goldskyer.com/metronic/theme">
+<#assign metronicPath="http://http://xcxx.szgm.edu.cn/metronic/theme">
 <#if title??> 
 <#else>
 	<#assign title="下村小学成绩系统">
